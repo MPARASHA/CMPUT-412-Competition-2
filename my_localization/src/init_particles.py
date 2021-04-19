@@ -3,6 +3,7 @@
 import rospy
 import sys
 from std_srvs.srv import Empty, EmptyRequest
+from rotate import rotate
 
 # Initialise a ROS node with the name service_client
 rospy.init_node('initialize_particles_client')
@@ -17,3 +18,10 @@ traj_by_name_object = EmptyRequest()
 # Send through the connection the name of the trajectory to be executed by the robot
 traj_by_name_service(traj_by_name_object)
 # Print the result given by the service called
+
+try:
+    # Testing our function
+    rotate()
+    pass
+except rospy.ROSInterruptException:
+    pass
