@@ -37,7 +37,7 @@
     <!-- <param name="laser_model_type" value="beam"/> -->
     <param name="laser_likelihood_max_dist" value="2.0"/>
     <param name="update_min_d" value="0.1"/>
-    <param name="update_min_a" value="0.1"/>
+    <param name="update_min_a" value="0.01"/>
     <param name="odom_frame_id" value="odom"/>
     <param name="resample_interval" value="1"/>
     <!-- Increase tolerance because the computer can get quite busy -->
@@ -48,7 +48,7 @@
     <remap from="scan" to="$(arg scan_topic)"/>
   </node>
 
- <node pkg="my_localization" type="init_particles.py" name="initialize_particles_client"  output="screen">  </node> 
+ <node pkg="competition2" type="main.py" name="main_competition2"  output="screen">  </node> 
 
 
 </launch>

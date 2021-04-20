@@ -29,7 +29,7 @@ class GetGoal:
         send_coordinates = SendGoal(request.label)
 
         response.navigation_successfull = True
-        response.message = "Goal Reached"
+        response.message = "\n\nGoal Reached\n\n"
 
         return response
 

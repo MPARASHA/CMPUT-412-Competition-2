@@ -1,0 +1,8 @@
+<launch>
+
+    <include file="$(find competition2)/launch/start_world.launch" />
+
+    <include file="$(find competition2)/launch/start_robot.launch" />
+
+
+</launch>

@@ -3,7 +3,7 @@ import rospy
 from geometry_msgs.msg import Twist
 PI = 3.1415926535897
 
-def rotate():
+def rotate(angle_rot):
     #Starts a new node
     velocity_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
     vel_msg = Twist()
@@ -11,7 +11,7 @@ def rotate():
     # Receiveing the user's input
     print("\n\nLocalizing....\n\n")
     speed = 30
-    angle = 1440
+    angle = angle_rot
     clockwise = True
 
     #Converting from angles to radians
