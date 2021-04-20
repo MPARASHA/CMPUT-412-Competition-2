@@ -2,5 +2,5 @@
 
 Commands to run:
 
-roslaunch competition2 start.launch
-roslaunch my_navigation full_navigation.launch 2>/dev/null
+* roslaunch competition2 start.launch
+* roslaunch my_navigation full_navigation.launch 2>/dev/null
