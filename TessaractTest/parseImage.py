@@ -225,11 +225,51 @@ def getbanditInfo():
     print("\nThe Number of Arms is:",num_arms,"\n\n")
 
 
+def getShapesInfo():
+    # load the example image and convert it to grayscale
+    image = cv2.imread(path_to_shapes_figure)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # check to see if we should apply thresholding to preprocess the
+    # image
+    if preproc == "thresh":
+        gray = cv2.threshold(gray, 0, 255,
+            cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+    # make a check to see if median blurring should be done to remove
+    # noise
+    elif preproc == "blur":
+        gray = cv2.medianBlur(gray, 3)
+    # write the grayscale image to disk as a temporary file so we can
+    # apply OCR to it
+    filename = "{}.png".format(os.getpid())
+    cv2.imwrite(filename, gray)
+
+    # load the image as a PIL/Pillow image, apply OCR, and then delete
+    # the temporary file
+    text = pytesseract.image_to_string(Image.open(filename))
+    os.remove(filename)
+
+    textList = text.split("\n")
+
+    colorText = textList[0]
+    shapeText = textList[1]
+
+    colorL = colorText.split(" ")
+    shapeL = shapeText.split(" ")
+
+    print("\n\nThe Color is:", colorL[-1], "\n")
+    print("\nThe Shape is:", shapeL[-1], "\n\n")
+
+
+
+
 # Know if to go to highest or lowest numbered room
 # getrch()
 
 # get a list containing room numbers
-getrooms()
+# getrooms()
 
 # get the information about the RL problem
 # getbanditInfo()
+
+# get the color and shape for shapes room
+getShapesInfo()
