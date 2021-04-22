@@ -1,10 +1,19 @@
 # import the necessary packages
+
+"""
+commands to run to make tesseract run:
+pip install pillow
+pip install pytesseract
+sudo apt-get update
+sudo apt-get install libleptonica-dev 
+sudo apt-get install tesseract-ocr
+sudo apt-get install libtesseract-dev
+"""
 from PIL import Image
 import pytesseract
 import argparse
 import cv2
 import os
-import numpy as np
 # construct the argument parse and parse the arguments
 
 # pytesseract.pytesseract.tesseract_cmd = "C:\Program Files\Tesseract-OCR\\tesseract.exe"
@@ -59,7 +68,9 @@ def getrch():
 
     print("\n\nNext room is that with the",rch, "number...\n\n")
     # show the output images
+
     return rch
+
 
 def getrooms():
 
@@ -224,7 +235,7 @@ def getbanditInfo():
 
     textList = text.split("\n")
 
-    print(textList)
+    # print(textList)
 
     passString = textList[5]
 
@@ -243,6 +254,8 @@ def getbanditInfo():
 
     print("\n\nThe Passcode is:",passcode,"\n")
     print("\nThe Number of Arms is:",num_arms,"\n\n")
+
+    return passcode, num_arms
 
 
 def getShapesInfo():
@@ -280,41 +293,16 @@ def getShapesInfo():
     print("\n\nThe Color is:", colorL[-1], "\n")
     print("\nThe Shape is:", shapeL[-1], "\n\n")
 
+    return colorl[-1], shapeL[-1]
+
 
 
 
 # # Know if to go to highest or lowest numbered room
-# rch = getrch()
+# getrch()
 
 # # get a list containing room numbers
-rch = getrch()
-
-roomsLetters = ['a', 'b','c', 'd', 'e', 'f',  'i', 'j', 'g','h', 'k', 'l', 'm', 'n', 'o', 'p', 'q']
-
-rooms = np.array(getrooms())
-
-
-print("\n\n")
-
-print("The room assignments are as follows: \n")
-
-for i in range(17):
-    rooms[i] = int(rooms[i])
-    print(roomsLetters[i], ":\t", rooms[i])
-
-print("\n\n")
-
-print(rooms)
-
-if rch == "highest":
-
-    ind = np.argmax(rooms)
-else:
-    ind = np.argmin(rooms)
-
-shaperoomLetter = roomsLetters[ind]
-
-print("Shapes Room: ", roomsLetters[ind], "\n\n")
+# getrooms()
 
 # # get the information about the RL problem
 # getbanditInfo()
