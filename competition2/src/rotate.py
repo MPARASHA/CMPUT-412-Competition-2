@@ -10,8 +10,8 @@ def rotate(angle_rot):
     vel_msg = Twist()
 
     # Receiveing the user's input
-    print("\n\nLocalizing....\n\n")
-    speed = 30
+    print("\nRotating....\n")
+    speed = 40
     angle = angle_rot
     clockwise = True
 

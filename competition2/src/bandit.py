@@ -102,6 +102,8 @@ def solve_bandit(passcode, narm):
 
     completion_time = end - start
 
-    print("\nTotal Time: {} seconds\n\n".format(completion_time))
+    print("\nTotal Bandit Time: {} seconds\n\n".format(completion_time))
+
+    return room, where
 
 solve_bandit(42, 2)
