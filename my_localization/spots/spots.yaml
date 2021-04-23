@@ -8,4 +8,190 @@ lobby:
       y: 0.0
       z: 0.8046405650984028
       w: 0.5937622091360505
-      
+
+roomca:
+  position:
+      x: -15.9
+      y: -15.2
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomcb:
+  position:
+      x: -6.5
+      y: -15
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomcc:
+  position:
+      x: 3.2
+      y: -14.2
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomcd:
+  position:
+      x: 13.5
+      y: -15.0
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomce:
+  position:
+      x: -15.4
+      y: -9.4
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomcf:
+  position:
+      x: -9.9
+      y: -9.2
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomcg:
+  position:
+      x: -4.0
+      y: -5.1
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomch:
+  position:
+      x: 12.6
+      y: -6.4
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomci:
+  position:
+      x: -16.3
+      y: -3.5
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomcj:
+  position:
+      x: -10.3
+      y: -3.9
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomck:
+  position:
+      x: -11.6
+      y: 4.1
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomcl:
+  position:
+      x: -1.2
+      y: 4.4
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomcm:
+  position:
+      x: 4.7
+      y: 4.2
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomcn:
+  position:
+      x: 12.5
+      y: 3.4
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomco:
+  position:
+      x: -13.8
+      y: 13.4
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomcp:
+  position:
+      x: -1.5
+      y: 13.5
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+
+roomcq:
+  position:
+      x: 12.3
+      y: 13.0
+      z: 0.0
+  orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
