@@ -299,7 +299,7 @@ def main_maze(r):
     global pub_,trigger
     out_maze = False
     trigger = False
-    rospy.init_node('reading_laser')
+    # rospy.init_node('reading_laser')
     
     pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
     

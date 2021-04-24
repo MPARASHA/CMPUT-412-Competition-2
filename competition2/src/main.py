@@ -48,7 +48,7 @@ bridge = CvBridge()
 
 preproc = "thresh"
 
-SKIP_MAZE = False
+SKIP_MAZE = True
 
 
 

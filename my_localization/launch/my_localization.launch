@@ -48,6 +48,7 @@
     <remap from="scan" to="$(arg scan_topic)"/>
   </node>
 
- <node pkg="follow_wall" type="follow.py" name="maze_competition2"  output="screen">  </node>
+ <node pkg="competition2" type="main.py" name="main_competition2"  output="screen">  </node>
+ <!-- <node pkg="follow_wall" type="follow.py" name="maze_competition2"  output="screen">  </node> -->
 
 </launch>
