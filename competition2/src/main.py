@@ -21,9 +21,84 @@ from rotate import rotate
 from competition2.srv import ShapesAnswer
 from bandit import solve_bandit, epsilon_greedy_policy
 
-from parseImage import getbanditInfo, getrch, getrooms, getShapesInfo, path_to_bandit_img, path_to_rch_lobby, path_to_room_fig, path_to_shapes_figure
+from parseImage import getFinalRoom, getbanditInfo, getrch, getrooms, getShapesInfo, path_to_bandit_img, path_to_rch_lobby, path_to_room_fig, path_to_shapes_figure, path_to_maze_figure
 
-SKIP_LOC = True  
+# rospy for the subscriber
+import rospy
+# ROS Image message
+from sensor_msgs.msg import Image
+# ROS Image message -> OpenCV2 image converter
+from cv_bridge import CvBridge, CvBridgeError
+# OpenCV2 for saving an image
+import cv2
+
+from rotate import rotate
+
+from PIL import Image as Im
+import pytesseract
+import argparse
+import os
+
+# Instantiate CvBridge
+bridge = CvBridge()
+
+preproc = "thresh"
+
+
+
+path_to_sign_text = 'camera_image.png'
+alldetected = []
+def detectText():
+
+    detected = False
+    # load the example image and convert it to grayscale
+    image = cv2.imread(path_to_sign_text)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # check to see if we should apply thresholding to preprocess the
+    # image
+    if preproc == "thresh":
+        gray = cv2.threshold(gray, 0, 255,
+            cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+    # make a check to see if median blurring should be done to remove
+    # noise
+    elif preproc == "blur":
+        gray = cv2.medianBlur(gray, 3)
+    # write the grayscale image to disk as a temporary file so we can
+    # apply OCR to it
+    filename = "{}.png".format(os.getpid())
+    cv2.imwrite(filename, gray)
+
+    # load the image as a PIL/Pillow image, apply OCR, and then delete
+    # the temporary file
+    text = pytesseract.image_to_string(Im.open(filename))
+
+    text.replace("\n", "")
+    text.replace("\x0c", "")
+    text.replace(" ", "")
+
+    textList = text.split()
+
+
+    if(text != '' and  len(textList) != 0):
+        detected = True 
+
+    return detected
+
+def image_callback(msg):
+    # print("Received an image!")
+    try:
+        # Convert your ROS Image message to OpenCV2
+        cv2_img = bridge.imgmsg_to_cv2(msg, "bgr8")
+    except CvBridgeError:
+        print(e)
+    
+    # Save your OpenCV2 image as a jpeg 
+    cv2.imwrite('camera_image.png', cv2_img)
+
+    alldetected.append(detectText())
+
+
+SKIP_LOC = True
 
 def localize():
     print("\n\nLOCALIZING...\n")
@@ -182,9 +257,26 @@ end = time.time()
 
 completion_time = end - start3
 
+start = time.time()
+
 print("\nTotal Time Taken to Go to Bandit Room: {} seconds\n\n".format(completion_time))
 
-# TODO DETECT SIGN HERE
+print("\nDetecting Sign...\n")
+
+image_topic = "/camera/rgb/image_raw"
+# Set up your subscriber and define its callback
+rospy.Subscriber(image_topic, Image, image_callback)
+
+rotate(360)
+
+time.sleep(10)
+
+end = time.time()
+
+completion_time = end - start
+
+
+print("\nTotal Time Taken to detect sign: {} seconds\n\n".format(completion_time))
 
 start = time.time()
 
@@ -195,6 +287,7 @@ passcode, narm = getbanditInfo()
 end = time.time()
 
 completion_time = end - start
+
 
 print("\nTotal Time Taken to read Bandit Info: {} seconds\n\n".format(completion_time))
 
@@ -218,6 +311,34 @@ completion_time = end - start3
 print("\nTotal Time for Step 3: {} seconds\n\n".format(completion_time))
 
 # **************************** STEP 3 ENDS HERE **************************************************************
+
+print("\n\nSKIPPING MAZE........\n\n")
+# Add maze above
+
+
+
+passcode, fr = getFinalRoom()
+
+ind = np.where(rooms == fr)[0]
+
+finalroomLetter = roomsLetters[ind[0]]
+
+print("\n\nFinal Room:", finalroomLetter, "\n")
+
+label = "roomc" + finalroomLetter
+
+service_req_nav.label = label
+result = service_nav(service_req_nav)
+# Print the result given by the service called
+print(result.message)
+
+print("\nWhere: ", where)
+
+end = time.time()
+
+completion_time = end - start1
+
+print("\nTotal Time for Demo: {} seconds\n\n".format(completion_time))
 
 
 

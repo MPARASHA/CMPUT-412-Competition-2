@@ -4,14 +4,13 @@ from geometry_msgs.msg import Twist
 import time
 PI = 3.1415926535897
 
-def rotate(angle_rot):
+def rotate(angle_rot, speed = 40):
     #Starts a new node
     velocity_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
     vel_msg = Twist()
 
     # Receiveing the user's input
     print("\nRotating....\n")
-    speed = 40
     angle = angle_rot
     clockwise = True
 
