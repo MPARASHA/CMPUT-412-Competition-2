@@ -163,6 +163,7 @@ def change_state(state):
 #         rate.sleep()
 ##################################### Follow the Left wall ############################
 
+
 def take_action():
     global regions_
     regions = regions_
@@ -238,8 +239,24 @@ def stop_robot():
     msg.angular.z = 0
     return msg
 
+def go_to_right_start(room):
+    rospy.wait_for_service('/get_coordinates')
+    # Create the connection to the service
+    service_nav = rospy.ServiceProxy('/get_coordinates', MyServiceMessage)
+
+    service_req_nav = MyServiceMessageRequest()
+
+    # These two lines for navigation
+    right_label = room+"_right"
+    service_req_nav.label = right_label
+    result = service_nav(service_req_nav)
+    # Print the result given by the service called
+    print(result.message)
+    end = time.time()
+
 
 def main():
+    go_to_right_start("p")
     global pub_,trigger
     out_maze = False
     trigger = False
@@ -252,10 +269,10 @@ def main():
     rate = rospy.Rate(20)
     while not out_maze:
         msg = Twist()
-        if state_ == 0 and trigger == False:
-            msg = find_wall()
+        # if state_ == 0 and trigger == False:
+        #     msg = find_wall()
 
-        elif state_  ==0 and trigger == True:
+        elif state_ ==0 :
             msg = turn_right()
             
         elif state_ == 1:
