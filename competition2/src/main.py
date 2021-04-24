@@ -19,6 +19,7 @@ import sys
 from std_srvs.srv import Empty, EmptyRequest
 from rotate import rotate
 from competition2.srv import ShapesAnswer
+from bandit import solve_bandit, epsilon_greedy_policy
 
 from parseImage import getbanditInfo, getrch, getrooms, getShapesInfo, path_to_bandit_img, path_to_rch_lobby, path_to_room_fig, path_to_shapes_figure
 
@@ -171,4 +172,56 @@ print("\nTotal Step 2 Time: {} seconds\n\n".format(completion_time))
 
 start3 = time.time()
 
-# TODO GO TO BANDIT ROOM, FIND SIGN AND SOLVE BANDIT
+label = "roomc" + banditroomLetter
+
+service_req_nav.label = label
+result = service_nav(service_req_nav)
+# Print the result given by the service called
+print(result.message)
+end = time.time()
+
+completion_time = end - start3
+
+print("\nTotal Time Taken to Go to Bandit Room: {} seconds\n\n".format(completion_time))
+
+# TODO DETECT SIGN HERE
+
+start = time.time()
+
+print("\n\nReading the Passcode and Number of arms from the PNG File...\n")
+
+passcode, narm = getbanditInfo()
+
+end = time.time()
+
+completion_time = end - start
+
+print("\nTotal Time Taken to read Bandit Info: {} seconds\n\n".format(completion_time))
+
+print("\nStarting to Solve Bandit...\n")
+
+
+mazeroom, where = solve_bandit(passcode, narm)
+
+
+ind = np.where(rooms == mazeroom)[0]
+
+mazeroomLetter = roomsLetters[ind[0]]
+
+print("\nMaze Room:", mazeroomLetter, "\n\n")
+
+
+end = time.time()
+
+completion_time = end - start3
+
+print("\nTotal Time for Step 3: {} seconds\n\n".format(completion_time))
+
+# **************************** STEP 3 ENDS HERE **************************************************************
+
+
+
+
+
+
+

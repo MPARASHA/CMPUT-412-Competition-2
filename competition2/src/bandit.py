@@ -82,18 +82,18 @@ def solve_bandit(passcode, narm):
     print("maze room:", room)
     print("where:", where, "\n\n")
 
-    """
+    
 
-    print("\norder of actions (from best action to worst action):")
+    print("\nOrderings of Arms")
     q_copy = np.copy(q).tolist()
     a = 0
     while a < narm:
         max_ = max(q_copy)
         max_index = q_copy.index(max_)
         q_copy[max_index] = -1
-        print("action {}".format(max_index+1))
+        print("Arm: {}".format(max_index+1))
         a += 1
-    """
+    
 
     
 
@@ -105,5 +105,3 @@ def solve_bandit(passcode, narm):
     print("\nTotal Bandit Time: {} seconds\n\n".format(completion_time))
 
     return room, where
-
-solve_bandit(42, 2)

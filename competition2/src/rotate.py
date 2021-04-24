@@ -47,7 +47,9 @@ def rotate(angle_rot):
 
 if __name__ == '__main__':
     try:
-        # Testing our function
-        rotate()
+        pass
+        # # Testing our function
+        # while(True):
+        #     rotate(360)
     except rospy.ROSInterruptException:
         pass
