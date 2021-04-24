@@ -15,11 +15,15 @@ import rosparam
 
 import numpy as np
 
+from follow import *
+
 import sys
 from std_srvs.srv import Empty, EmptyRequest
 from rotate import rotate
 from competition2.srv import ShapesAnswer
 from bandit import solve_bandit, epsilon_greedy_policy
+
+from competition2.srv import MazeAnswer
 
 from parseImage import getFinalRoom, getbanditInfo, getrch, getrooms, getShapesInfo, path_to_bandit_img, path_to_rch_lobby, path_to_room_fig, path_to_shapes_figure, path_to_maze_figure
 
@@ -43,6 +47,8 @@ import os
 bridge = CvBridge()
 
 preproc = "thresh"
+
+SKIP_MAZE = False
 
 
 
@@ -311,13 +317,28 @@ completion_time = end - start3
 print("\nTotal Time for Step 3: {} seconds\n\n".format(completion_time))
 
 # **************************** STEP 3 ENDS HERE **************************************************************
-
-print("\n\nSKIPPING MAZE........\n\n")
+who = ""
+if(SKIP_MAZE):
+    print("\n\nSKIPPING MAZE........\n\n")
+    passcode, fr = getFinalRoom()
 # Add maze above
+else:
+    start = time.time()
+    print("\n\nGoing to Maze...\n")
+    main_maze(mazeroomLetter)
+    end = time.time()
+
+    completion_time = end - start
+
+    print("\nTotal Time for Maze: {} seconds\n\n".format(completion_time))
+    time.sleep(5)
+    passcode, fr = getFinalRoom()
+    rospy.wait_for_service("/maze_answer")
+    maze_answer_client = rospy.ServiceProxy("/maze_answer", MazeAnswer)
+    response = maze_answer_client(passcode)
+    who = response.who
 
 
-
-passcode, fr = getFinalRoom()
 
 ind = np.where(rooms == fr)[0]
 
@@ -330,9 +351,12 @@ label = "roomc" + finalroomLetter
 service_req_nav.label = label
 result = service_nav(service_req_nav)
 # Print the result given by the service called
-print(result.message)
 
+how = ""
+print(result.message)
+print("\nHow: ", how)
 print("\nWhere: ", where)
+print("\nWho: ", who)
 
 end = time.time()
 

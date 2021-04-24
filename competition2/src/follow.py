@@ -294,8 +294,8 @@ def go_to_right_start(room):
     end = time.time()
 
 
-def main():
-    go_to_right_start("p")
+def main_maze(r):
+    go_to_right_start(r)
     global pub_,trigger
     out_maze = False
     trigger = False
@@ -331,5 +331,3 @@ def main():
         
         rate.sleep()
 
-if __name__ == '__main__':
-    main()
